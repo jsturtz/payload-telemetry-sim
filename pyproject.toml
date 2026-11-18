@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "payload-sim"
+version = "0.1.0"
+description = "Simulated spacecraft payload instrument for test-infrastructure practice"
+readme = "APP.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.5", "build>=1.0"]
+
+[project.scripts]
+payload-sim = "payload_sim.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["payload_sim*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "hardware: needs the lab instrument; skipped unless LAB_HARDWARE=1",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
